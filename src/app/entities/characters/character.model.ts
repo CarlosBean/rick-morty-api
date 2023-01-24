@@ -1,10 +1,13 @@
+export type Status = 'Alive' | 'Dead' | 'unknown';
+export type Gender = 'Female' | 'Male' | 'Genderless' | 'unknown'
+
 export interface Character {
-  id?:       number;
+  id:        number;
   name?:     string;
-  status?:   string;
+  status:    Status;
   species?:  string;
   type?:     string;
-  gender?:   string;
+  gender:    Gender;
   origin?:   Location;
   location?: Location;
   image?:    string;
