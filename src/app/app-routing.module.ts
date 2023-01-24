@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { 
+    path: '', 
+    loadComponent: () => import('./entities/characters/character-list/character-list.component').then(mod => mod.CharacterListComponent)
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
