@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Character } from './character.model';
 
@@ -8,10 +8,14 @@ import { Character } from './character.model';
   providedIn: 'root'
 })
 export class CharactersService {
-  uri = `${environment.API_URL}/`;
+  resourceUrl = `${environment.API_URL}/character`;
   constructor(private http: HttpClient) { }
 
-  getAllCharacters(): Observable<Character[]> {
-    return this.http.get<Character[]>(`${this.uri}/character`);
+  getAllCharacters(page: number): Observable<Character[]> {
+    const options: HttpParams = new HttpParams();
+    options.append('page', page);
+
+    return this.http.get<Character[]>(this.resourceUrl, { params: options })
+      .pipe(map((res: any) => res.results));
   }
 }
