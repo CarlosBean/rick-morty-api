@@ -1,11 +1,17 @@
-<section class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-50">
+<section
+  class="grid grid-cols-1 gap-4 bg-gray-50 p-4 md:grid-cols-2 lg:grid-cols-4">
   <ng-container *ngIf="characters$ | async as characters">
-    <ng-container *ngFor="let character of characters.results; index as i; trackBy: trackByFn">
+    <ng-container
+      *ngFor="
+        let character of characters.results;
+        index as i;
+        trackBy: trackByFn
+      ">
       <app-character-card [data]="character" />
     </ng-container>
   </ng-container>
 
   <ng-container *ngIf="loading$ | async">
-    <app-skeleton-card *ngFor="let _item of skeletonItems;" />
+    <app-skeleton-card *ngFor="let _item of skeletonItems" />
   </ng-container>
 </section>
