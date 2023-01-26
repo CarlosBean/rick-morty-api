@@ -17,7 +17,9 @@
   </div>
 
   <div class="flex-1 space-y-2 rounded-r-md border p-3">
-    <div class="mb-1 text-xl font-bold group-hover:text-green-500">
+    <div
+      class="mb-1 break-all text-xl font-bold group-hover:text-green-500 md:break-normal"
+    >
       {{ data.name }}
     </div>
 
@@ -36,12 +38,16 @@
 
     <div class="leading-snug">
       <div class="font-bold capitalize text-gray-500">last known location:</div>
-      <p class="text-sm text-gray-500">{{ data.location?.name }}</p>
+      <p class="break-all text-sm text-gray-500 md:break-normal">
+        {{ data.location?.name }}
+      </p>
     </div>
 
     <div class="leading-snug">
       <div class="font-bold capitalize text-gray-500">first seen in:</div>
-      <p class="text-sm text-gray-500">{{ data.origin?.name }}</p>
+      <p class="break-all text-sm text-gray-500 md:break-normal">
+        {{ data.origin?.name }}
+      </p>
     </div>
   </div>
 </div>
