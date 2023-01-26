@@ -1,13 +1,18 @@
 <section
-  class="grid grid-cols-1 gap-4 bg-gray-50 p-4 md:grid-cols-2 lg:grid-cols-4">
+  class="grid grid-cols-1 gap-4 bg-gray-50 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+>
   <ng-container *ngIf="characters$ | async as characters">
     <ng-container
       *ngFor="
         let character of characters.results;
         index as i;
         trackBy: trackByFn
-      ">
-      <app-character-card [data]="character" />
+      "
+    >
+      <app-character-card
+        [data]="character"
+        (click)="navigateTo(character.id)"
+      />
     </ng-container>
   </ng-container>
 
