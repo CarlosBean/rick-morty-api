@@ -12,18 +12,17 @@
         <div class="my-4 text-xl font-bold capitalize">episodes:</div>
         <div class="flex flex-wrap gap-4">
           <a
-            class="w-12 cursor-pointer rounded-md border-2 border-slate-500 bg-slate-100 py-2 text-center font-bold hover:bg-slate-300"
+            class="w-20 cursor-pointer rounded-md border-2 border-slate-500 bg-slate-100 py-2 text-center font-bold hover:bg-slate-300"
             *ngFor="let episode of character.episode"
           >
-            {{ episode | slice : 40 }}
+            {{ episode }}
           </a>
         </div>
       </div>
     </div>
     <div class="flex-1 space-y-3 p-4 text-lg">
-      <div>
-        <div class="font-bold capitalize">name:</div>
-        <p>{{ character.name }}</p>
+      <div class="text-2xl font-bold uppercase">
+        {{ character.name }}
       </div>
       <div>
         <div class="font-bold capitalize">gender:</div>
