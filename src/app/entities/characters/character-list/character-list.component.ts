@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CharactersService, PageResponse } from '../characters.service';
+import { CharactersService } from '../characters.service';
 import { Character } from '../character.model';
 import { Observable } from 'rxjs';
 import { CharacterCardComponent } from '../character-card/character-card.component';
 import { SkeletonCardComponent } from '../character-card/skeleton-card.component';
 import { Router } from '@angular/router';
+import { PageResponse } from 'src/app/core/model/page-response.model';
 
 @Component({
   selector: 'app-character-list',
