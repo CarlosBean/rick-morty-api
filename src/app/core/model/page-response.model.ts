@@ -1,11 +1,11 @@
 export interface PageInfo {
-  count?: number;
-  pages?: number;
+  count: number;
+  pages: number;
   next?: string;
   prev?: null;
 }
 
 export interface PageResponse {
-  info?: PageInfo;
+  info: PageInfo;
   results: any[];
 }
