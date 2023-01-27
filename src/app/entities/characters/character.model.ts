@@ -11,7 +11,7 @@ export interface Character {
   origin?: Location;
   location?: Location;
   image?: string;
-  episode?: string[];
+  episode: string[];
   url?: string;
   created?: Date;
 }
