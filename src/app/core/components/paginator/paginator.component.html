@@ -1,0 +1,24 @@
+<div class="flex justify-center gap-4">
+  <button
+    [disabled]="currentPage <= 1"
+    class="h-8 w-14 rounded-full bg-green-200 font-bold text-gray-700 hover:bg-green-300 disabled:bg-slate-300"
+    (click)="pageChanged.emit(currentPage - 1)"
+  >
+    Prev
+  </button>
+
+  <button
+    class="h-8 w-8 rounded-full border-2 border-green-400 bg-green-100 font-bold text-green-600"
+    disabled
+  >
+    {{ currentPage }}
+  </button>
+
+  <button
+    [disabled]="totalPages && currentPage >= totalPages"
+    class="h-8 w-14 rounded-full bg-green-200 font-bold text-gray-700 hover:bg-green-300 disabled:bg-slate-300"
+    (click)="pageChanged.emit(currentPage + 1)"
+  >
+    Next
+  </button>
+</div>
