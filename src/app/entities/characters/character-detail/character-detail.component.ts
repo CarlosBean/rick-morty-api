@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharactersService } from '../characters.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,7 @@ import { Character } from '../character.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './character-detail.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterDetailComponent {
   character$!: Observable<Character>;

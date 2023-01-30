@@ -1,33 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-skeleton-card',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="animate-pulse flex p-2 rounded-md h-48 bg-slate-200">
-      <div class="rounded-xl bg-slate-400 h-36 w-32"></div>
-    
+    <div class="flex h-48 animate-pulse rounded-md bg-slate-200 p-2">
+      <div class="h-36 w-32 rounded-xl bg-slate-400"></div>
+
       <div class="flex-1 p-3 pb-0">
         <div class="space-y-5">
           <div class="space-y-2">
-            <div class="h-6 bg-slate-400 rounded-sm w-40"></div>
-            <div class="h-5 bg-slate-400 rounded-sm w-20"></div>
+            <div class="h-6 w-40 rounded-sm bg-slate-400"></div>
+            <div class="h-5 w-20 rounded-sm bg-slate-400"></div>
           </div>
-    
+
           <div class="space-y-2">
-            <div class="h-3 bg-slate-400 rounded-sm w-48"></div>
-            <div class="h-3 bg-slate-400 rounded-sm"></div>
+            <div class="h-3 w-48 rounded-sm bg-slate-400"></div>
+            <div class="h-3 rounded-sm bg-slate-400"></div>
           </div>
-    
+
           <div class="space-y-2">
-            <div class="h-3 bg-slate-400 rounded-sm w-28"></div>
-            <div class="h-3 bg-slate-400 rounded-sm"></div>
+            <div class="h-3 w-28 rounded-sm bg-slate-400"></div>
+            <div class="h-3 rounded-sm bg-slate-400"></div>
           </div>
         </div>
       </div>
     </div>
-  `
+  `,
 })
 export class SkeletonCardComponent {}

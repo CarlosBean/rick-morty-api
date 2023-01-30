@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharactersService } from '../characters.service';
 import { Character } from '../character.model';
@@ -19,6 +19,7 @@ import { PaginatorComponent } from 'src/app/core/components/paginator/paginator.
     PaginatorComponent,
   ],
   templateUrl: './character-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterListComponent {
   skeletonItems!: object[];
