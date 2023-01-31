@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, finalize, map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { PageResponse } from 'src/app/core/model/page-response.model';
 import { environment } from 'src/environments/environment';
 import { EpisodesService } from '../episodes/episodes.service';
@@ -11,27 +11,18 @@ import { Character } from './character.model';
 })
 export class CharactersService {
   resourceUrl = `${environment.API_URL}/character`;
-  loading$ = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private _episodes: EpisodesService) {}
 
   getAllCharacters(page: number): Observable<PageResponse> {
     let params: HttpParams = new HttpParams().append('page', page);
-
-    this.loading$.next(true);
-
-    return this.http
-      .get<PageResponse>(this.resourceUrl, { params: params })
-      .pipe(finalize(() => this.loading$.next(false)));
+    return this.http.get<PageResponse>(this.resourceUrl, { params: params });
   }
 
   getCharacterById(id: number): Observable<Character> {
-    this.loading$.next(true);
-
-    return this.http.get<Character>(`${this.resourceUrl}/${id}`).pipe(
-      finalize(() => this.loading$.next(false)),
-      switchMap(character => this.addEpisodeNames(character))
-    );
+    return this.http
+      .get<Character>(`${this.resourceUrl}/${id}`)
+      .pipe(switchMap(character => this.addEpisodeNames(character)));
   }
 
   addEpisodeNames(character: Character): Observable<Character> {
