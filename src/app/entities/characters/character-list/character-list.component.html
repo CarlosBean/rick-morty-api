@@ -5,7 +5,7 @@
   "
 >
   <section
-    class="grid grid-cols-1 gap-4 bg-gray-50 p-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    class="grid h-auto auto-rows-max grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <app-character-card
       *ngFor="
@@ -18,7 +18,7 @@
     />
   </section>
 
-  <div class="bg-gray-50 px-5 pt-2 pb-5 text-center">
+  <div class="p-5 text-center">
     <app-paginator
       [currentPage]="vm.currentPage"
       [totalPages]="vm.characters.info.pages"
@@ -29,7 +29,7 @@
 
 <ng-template #loading>
   <section
-    class="grid grid-cols-1 gap-4 bg-gray-50 p-5 pb-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <app-skeleton-card *ngFor="let _item of [1, 2, 3, 4]" />
   </section>
