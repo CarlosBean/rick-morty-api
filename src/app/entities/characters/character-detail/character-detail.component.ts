@@ -4,17 +4,17 @@ import { CharactersService } from '../characters.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Character } from '../character.model';
+import { LetModule } from '@ngrx/component';
 
 @Component({
   selector: 'app-character-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LetModule],
   templateUrl: './character-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterDetailComponent {
   character$!: Observable<Character>;
-  loading$ = this.charactersService.loading$.asObservable();
 
   constructor(
     private charactersService: CharactersService,

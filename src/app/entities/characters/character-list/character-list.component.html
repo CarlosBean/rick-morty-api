@@ -1,32 +1,36 @@
-<ng-container *ngIf="characters$ | async as characters">
-  <section class="bg-gray-50 px-5 pb-10">
-    <div class="py-5 text-center">
-      <app-paginator
-        [currentPage]="currentPage"
-        [totalPages]="characters.info.pages"
-        (pageChanged)="getAllCharacters($event)"
-      />
-    </div>
-
-    <div
-      class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-    >
-      <app-character-card
-        *ngFor="
-          let character of characters.results;
-          index as i;
-          trackBy: trackByFn
-        "
-        [data]="character"
-        (click)="navigateTo(character.id)"
-      />
-    </div>
+<ng-container
+  *ngrxLet="
+    { characters: characters$, currentPage: currentPage$ } as vm;
+    suspenseTpl: loading
+  "
+>
+  <section
+    class="grid grid-cols-1 gap-4 bg-gray-50 p-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <app-character-card
+      *ngFor="
+        let character of vm.characters.results;
+        index as i;
+        trackBy: trackByFn
+      "
+      [data]="character"
+      (click)="navigateTo(character.id)"
+    />
   </section>
+
+  <div class="bg-gray-50 px-5 pt-2 pb-5 text-center">
+    <app-paginator
+      [currentPage]="vm.currentPage"
+      [totalPages]="vm.characters.info.pages"
+      (pageChanged)="currentPage$.next($event)"
+    />
+  </div>
 </ng-container>
 
-<section
-  *ngIf="loading$ | async"
-  class="grid grid-cols-1 gap-4 bg-gray-50 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
->
-  <app-skeleton-card *ngFor="let _item of skeletonItems" />
-</section>
+<ng-template #loading>
+  <section
+    class="grid grid-cols-1 gap-4 bg-gray-50 px-5 pb-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    <app-skeleton-card *ngFor="let _item of [1, 2, 3, 4]" />
+  </section>
+</ng-template>

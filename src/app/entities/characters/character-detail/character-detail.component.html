@@ -1,5 +1,5 @@
 <div class="m-4 flex">
-  <ng-container *ngIf="character$ | async as character">
+  <ng-container *ngrxLet="character$ as character; suspenseTpl: loading">
     <div class="max-w-xs flex-none">
       <img
         class="rounded-md"
@@ -50,6 +50,5 @@
       </div>
     </div>
   </ng-container>
-
-  <ng-container *ngIf="loading$ | async"> Loading... </ng-container>
 </div>
+<ng-template #loading> Loading... </ng-template>
