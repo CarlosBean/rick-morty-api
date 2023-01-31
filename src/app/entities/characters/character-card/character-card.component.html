@@ -1,6 +1,6 @@
 <div
   *ngIf="data"
-  class="group flex cursor-pointer rounded-md bg-white transition duration-200 ease-in-out hover:shadow-md"
+  class="group flex cursor-pointer rounded-md bg-white transition duration-150 ease-in-out hover:shadow-md"
 >
   <div class="flex w-32 flex-none flex-col">
     <img
@@ -16,9 +16,11 @@
     </div>
   </div>
 
-  <div class="min-w-0 flex-1 space-y-2 rounded-r-md border p-3">
+  <div
+    class="min-w-0 flex-1 space-y-2 rounded-r-md border-2 border-l-0 p-3 transition duration-150 group-hover:border-green-400"
+  >
     <div
-      class="mb-1 overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold group-hover:text-green-500"
+      class="mb-1 overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold transition duration-150 group-hover:text-green-400"
     >
       {{ data.name }}
     </div>
