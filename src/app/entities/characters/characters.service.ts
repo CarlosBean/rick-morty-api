@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, switchMap } from 'rxjs';
 import { PageResponse } from 'src/app/core/model/page-response.model';
 import { environment } from 'src/environments/environment';
 import { EpisodesService } from '../episodes/episodes.service';
@@ -14,9 +14,14 @@ export class CharactersService {
 
   constructor(private http: HttpClient, private _episodes: EpisodesService) {}
 
-  getAllCharacters(page: number): Observable<PageResponse> {
-    let params: HttpParams = new HttpParams().append('page', page);
-    return this.http.get<PageResponse>(this.resourceUrl, { params: params });
+  getAllCharacters(page: number, name: string): Observable<PageResponse> {
+    let params: HttpParams = new HttpParams()
+      .append('page', page)
+      .append('name', name);
+
+    return this.http
+      .get<PageResponse>(this.resourceUrl, { params: params })
+      .pipe(catchError(err => EMPTY));
   }
 
   getCharacterById(id: number): Observable<Character> {
