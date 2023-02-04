@@ -11,5 +11,7 @@
     class="block w-full rounded-md border-2 border-gray-400 pl-7 outline-green-400"
     placeholder="Search by name"
     spellcheck="false"
+    autocomplete="off"
+    (input)="handleInput($event)"
   />
 </div>
