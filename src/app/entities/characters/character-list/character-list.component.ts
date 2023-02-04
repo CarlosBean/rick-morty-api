@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharactersService } from '../characters.service';
 import { Character } from '../character.model';
-import { Observable, BehaviorSubject, switchMap } from 'rxjs';
+import { BehaviorSubject, switchMap, combineLatest, pairwise } from 'rxjs';
 import { CharacterCardComponent } from '../character-card/character-card.component';
 import { SkeletonCardComponent } from '../character-card/skeleton-card.component';
 import { Router } from '@angular/router';
-import { PageResponse } from 'src/app/core/model/page-response.model';
 import { PaginatorComponent } from 'src/app/core/components/paginator/paginator.component';
 import { LetModule } from '@ngrx/component';
+import { SearchService } from 'src/app/core/components/search-bar/search.service';
 
 @Component({
   selector: 'app-character-list',
@@ -24,16 +24,25 @@ import { LetModule } from '@ngrx/component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterListComponent {
-  currentPage$!: BehaviorSubject<number>;
-  characters$!: Observable<PageResponse>;
+  page = 1;
+  page$ = new BehaviorSubject(1);
 
-  constructor(private characters: CharactersService, private router: Router) {
-    this.currentPage$ = new BehaviorSubject<number>(1);
+  characters$ = combineLatest({
+    page: this.page$,
+    text: this.search.action(),
+  }).pipe(
+    pairwise(),
+    switchMap(([prev, curr]) => {
+      this.page = prev.page === curr.page ? 1 : curr.page;
+      return this.characters.getAllCharacters(this.page, curr.text);
+    })
+  );
 
-    this.characters$ = this.currentPage$.pipe(
-      switchMap(page => this.characters.getAllCharacters(page))
-    );
-  }
+  constructor(
+    private characters: CharactersService,
+    private router: Router,
+    private search: SearchService
+  ) {}
 
   trackByFn(index: number, name: Character): number {
     return name.id;

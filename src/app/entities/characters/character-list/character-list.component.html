@@ -1,15 +1,10 @@
-<ng-container
-  *ngrxLet="
-    { characters: characters$, currentPage: currentPage$ } as vm;
-    suspenseTpl: loading
-  "
->
+<ng-container *ngrxLet="characters$ as characters; suspenseTpl: loading">
   <section
     class="grid h-auto auto-rows-max grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <app-character-card
       *ngFor="
-        let character of vm.characters.results;
+        let character of characters.results;
         index as i;
         trackBy: trackByFn
       "
@@ -20,9 +15,9 @@
 
   <div class="p-5 text-center">
     <app-paginator
-      [currentPage]="vm.currentPage"
-      [totalPages]="vm.characters.info.pages"
-      (pageChanged)="currentPage$.next($event)"
+      [currentPage]="page"
+      [totalPages]="characters.info.pages"
+      (pageChanged)="page$.next($event)"
     />
   </div>
 </ng-container>
