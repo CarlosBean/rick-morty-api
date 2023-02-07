@@ -2,7 +2,9 @@
   *ngIf="data"
   class="group flex cursor-pointer rounded-md bg-white transition duration-150 ease-in-out hover:shadow-md"
 >
-  <div class="flex w-32 flex-none flex-col">
+  <div
+    class="flex w-32 flex-none flex-col rounded-l-md bg-green-100 group-hover:border-2 group-hover:border-r-0 group-hover:border-green-300"
+  >
     <img
       [src]="data.image"
       alt=""
@@ -17,7 +19,7 @@
   </div>
 
   <div
-    class="min-w-0 flex-1 space-y-2 rounded-r-md border-2 border-l-0 p-3 transition duration-150 group-hover:border-green-400"
+    class="min-w-0 flex-1 space-y-2 rounded-r-md border-2 border-l-0 p-3 transition duration-150 group-hover:border-green-300"
   >
     <div
       class="mb-1 overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold transition duration-150 group-hover:text-green-400"
