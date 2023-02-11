@@ -19,9 +19,7 @@ export class CharactersService {
       .append('page', page)
       .append('name', name);
 
-    return this.http
-      .get<PageResponse>(this.resourceUrl, { params: params })
-      .pipe(catchError(err => EMPTY));
+    return this.http.get<PageResponse>(this.resourceUrl, { params: params });
   }
 
   getCharacterById(id: number): Observable<Character> {
