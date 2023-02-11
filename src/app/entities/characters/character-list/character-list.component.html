@@ -1,13 +1,18 @@
-<ng-container *ngrxLet="characters$ as characters; suspenseTpl: loading">
+<ng-container
+  *rxLet="
+    characters$;
+    let characters;
+    error: err;
+    errorTrigger: errorTrigger$;
+    suspense: suspense;
+    suspenseTrigger: search.text$
+  "
+>
   <section
     class="grid h-auto auto-rows-max grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <app-character-card
-      *ngFor="
-        let character of characters.results;
-        index as i;
-        trackBy: trackByFn
-      "
+      *rxFor="let character of characters.results; trackBy: 'id'"
       [data]="character"
       (click)="navigateTo(character.id)"
     />
@@ -22,7 +27,15 @@
   </div>
 </ng-container>
 
-<ng-template #loading>
+<ng-template #err>
+  <section
+    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  >
+    {{ errorMessage }}
+  </section>
+</ng-template>
+
+<ng-template #suspense>
   <section
     class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
