@@ -11,14 +11,14 @@ import {
   providedIn: 'root',
 })
 export class SearchService {
-  searchText$: BehaviorSubject<string>;
+  text$: BehaviorSubject<string>;
 
   constructor() {
-    this.searchText$ = new BehaviorSubject('');
+    this.text$ = new BehaviorSubject('');
   }
 
-  action(): Observable<string> {
-    return this.searchText$.pipe(
+  input(): Observable<string> {
+    return this.text$.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       startWith('')

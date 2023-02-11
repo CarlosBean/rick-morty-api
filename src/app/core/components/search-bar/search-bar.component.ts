@@ -10,6 +10,6 @@ export class SearchBarComponent {
 
   handleInput(ev: any) {
     const text = ev.target?.value ? ev.target?.value.trim() : '';
-    this.search.searchText$.next(text);
+    this.search.text$.next(text);
   }
 }
