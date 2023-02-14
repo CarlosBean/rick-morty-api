@@ -12,6 +12,7 @@
     placeholder="Search by name"
     spellcheck="false"
     autocomplete="off"
+    (keydown)="handleKeydown($event)"
     (input)="handleInput($event)"
   />
 </div>

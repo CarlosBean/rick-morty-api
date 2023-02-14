@@ -46,7 +46,8 @@ export class CharacterListComponent {
   }).pipe(
     pairwise(),
     switchMap(([prev, curr]) => {
-      this.page = prev.page === curr.page ? 1 : curr.page;
+      this.page = prev.text === curr.text ? curr.page : 1;
+
       return this.characters.getAllCharacters(this.page, curr.text).pipe(
         catchError(({ error }: HttpErrorResponse) => {
           this.errorMessage = error.error ?? error;
