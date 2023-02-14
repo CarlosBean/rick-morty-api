@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent {
   constructor(private search: SearchService) {}
