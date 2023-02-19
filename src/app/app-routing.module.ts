@@ -17,6 +17,7 @@ const routes: Routes = [
         './entities/characters/character-detail/character-detail.component'
       ).then(mod => mod.CharacterDetailComponent),
   },
+  { path: '**', redirectTo: 'characters' },
 ];
 
 @NgModule({
