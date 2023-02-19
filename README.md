@@ -2,7 +2,7 @@
 
 This project was created with Angular version 15.1.2, Tailwind and Rx-angular/template. As dummy data uses API https://rickandmortyapi.com
 
-![image](https://user-images.githubusercontent.com/28544358/219916590-a8a89c5a-1a42-47e9-874c-89e44b090888.png)
+![image](https://user-images.githubusercontent.com/28544358/219917245-a03c7d7b-df44-4024-917e-c11c5338d7c9.png)
 
 ## Development server
 
