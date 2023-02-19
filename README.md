@@ -1,4 +1,4 @@
-# FirstAttemp
+# Rick And Morty API Test
 
 This project was created with Angular version 15.1.2, Tailwind and Rx-angular/template. As dummy data uses API https://rickandmortyapi.com
 
