@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 import { PaginatorComponent } from 'src/app/core/components/paginator/paginator.component';
 import { SearchService } from 'src/app/core/components/search-bar/search.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ForModule } from '@rx-angular/template/for';
-import { LetModule } from '@rx-angular/template/let';
+import { RxFor } from '@rx-angular/template/for';
+import { RxLet } from '@rx-angular/template/let';
 
 @Component({
   selector: 'app-character-list',
@@ -27,8 +27,8 @@ import { LetModule } from '@rx-angular/template/let';
     CharacterCardComponent,
     SkeletonCardComponent,
     PaginatorComponent,
-    LetModule,
-    ForModule,
+    RxLet,
+    RxFor,
   ],
   templateUrl: './character-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

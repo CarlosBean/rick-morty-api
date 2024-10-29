@@ -4,12 +4,12 @@ import { CharactersService } from '../characters.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Character } from '../character.model';
-import { LetModule } from '@ngrx/component';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'app-character-detail',
   standalone: true,
-  imports: [CommonModule, LetModule],
+  imports: [CommonModule, LetDirective],
   templateUrl: './character-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
