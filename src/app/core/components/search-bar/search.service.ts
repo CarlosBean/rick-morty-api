@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   debounceTime,
-  first,
-  merge,
   Observable,
-  skip,
-  startWith,
 } from 'rxjs';
 
 @Injectable({
@@ -20,9 +16,6 @@ export class SearchService {
   }
 
   input(): Observable<string> {
-    return merge(
-      this.text$.pipe(first()),
-      this.text$.pipe(skip(1), debounceTime(400), startWith(''))
-    );
+    return this.text$.pipe(debounceTime(400));
   }
 }

@@ -20,7 +20,7 @@
 
   <div class="p-5 text-center">
     <app-paginator
-      [currentPage]="page"
+      [currentPage]="currentPage"
       [totalPages]="characters.info.pages"
       (pageChanged)="page$.next($event)"
     />

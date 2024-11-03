@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharactersService } from '../characters.service';
 import {
-  BehaviorSubject,
   switchMap,
-  combineLatest,
-  pairwise,
   catchError,
   EMPTY,
   Subject,
+  map,
+  merge,
+  tap,
 } from 'rxjs';
 import { CharacterCardComponent } from '../character-card/character-card.component';
 import { SkeletonCardComponent } from '../character-card/skeleton-card.component';
@@ -34,26 +34,24 @@ import { RxLet } from '@rx-angular/template/let';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterListComponent {
-  page = 1;
-  page$ = new BehaviorSubject(1);
-
+  currentPage = 1;
+  page$ = new Subject<number>();
   errorMessage = '';
   errorTrigger$ = new Subject();
 
-  characters$ = combineLatest({
-    page: this.page$,
-    text: this.search.input(),
-  }).pipe(
-    pairwise(),
-    switchMap(([prev, curr]) => {
-      this.page = prev.text === curr.text ? curr.page : 1;
+  paramsByPage$ = this.page$.pipe(map(page => {
+    return { page, text: this.search.text$.value }
+  }));
 
-      return this.characters.getAllCharacters(this.page, curr.text).pipe(
-        catchError(({ error }: HttpErrorResponse) => {
-          this.errorMessage = error.error ?? error;
-          this.errorTrigger$.next(this.errorMessage);
-          return EMPTY;
-        })
+  paramsByText$ = this.search.input().pipe(map(text => {
+    return { page: 1, text }
+  }));
+
+  characters$ = merge(this.paramsByPage$, this.paramsByText$).pipe(
+    switchMap(params => {
+      return this.characters.getAllCharacters(params.page, params.text).pipe(
+        tap(() => (this.currentPage = params.page)),
+        catchError(this.handleError())
       );
     })
   );
@@ -63,6 +61,14 @@ export class CharacterListComponent {
     private router: Router,
     public search: SearchService
   ) {}
+
+  handleError() {
+    return (error: HttpErrorResponse) => {
+      this.errorMessage = error.error.error ?? error.error;
+      this.errorTrigger$.next(this.errorMessage);
+      return EMPTY;
+    }
+  }
 
   navigateTo(index: number): void {
     this.router.navigate(['characters', index]);
