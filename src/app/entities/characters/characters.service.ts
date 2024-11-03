@@ -1,10 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { PageResponse } from 'src/app/core/model/page-response.model';
 import { environment } from 'src/environments/environment';
 import { EpisodesService } from '../episodes/episodes.service';
-import { Character } from './character.model';
+import { Character, CharacterParams } from './character.model';
+import { buildQueryParams } from 'src/app/core/utils/request-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,9 @@ export class CharactersService {
 
   constructor(private http: HttpClient, private _episodes: EpisodesService) {}
 
-  getAllCharacters(page: number, name: string): Observable<PageResponse> {
-    let params: HttpParams = new HttpParams()
-      .append('page', page)
-      .append('name', name);
-
-    return this.http.get<PageResponse>(this.resourceUrl, { params: params });
+  getAllCharacters(params: CharacterParams): Observable<PageResponse> {
+    const queryParams = buildQueryParams(params);
+    return this.http.get<PageResponse>(this.resourceUrl, { params: queryParams });
   }
 
   getCharacterById(id: number): Observable<Character> {

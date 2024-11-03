@@ -40,16 +40,16 @@ export class CharacterListComponent {
   errorTrigger$ = new Subject();
 
   paramsByPage$ = this.page$.pipe(map(page => {
-    return { page, text: this.search.text$.value }
+    return { page, name: this.search.text$.value }
   }));
 
-  paramsByText$ = this.search.input().pipe(map(text => {
-    return { page: 1, text }
+  paramsByName$ = this.search.input().pipe(map(text => {
+    return { page: 1, name: text }
   }));
 
-  characters$ = merge(this.paramsByPage$, this.paramsByText$).pipe(
+  characters$ = merge(this.paramsByPage$, this.paramsByName$).pipe(
     switchMap(params => {
-      return this.characters.getAllCharacters(params.page, params.text).pipe(
+      return this.characters.getAllCharacters(params).pipe(
         tap(() => (this.currentPage = params.page)),
         catchError(this.handleError())
       );

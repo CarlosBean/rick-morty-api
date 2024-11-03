@@ -20,3 +20,11 @@ export interface Location {
   name?: string;
   url?: string;
 }
+
+export interface CharacterParams {
+  name?: string;
+  status?: Status;
+  species?: string;
+  type?: string;
+  gender?: Gender;
+}
