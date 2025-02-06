@@ -5,12 +5,18 @@
     error: err;
     errorTrigger: errorTrigger$;
     suspense: suspense;
-    suspenseTrigger: search.text$
+    suspenseTrigger: suspenseTrigger$
   "
 >
-  <section
-    class="grid h-auto auto-rows-max grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
+  <div class="pb-5 text-center">
+    <app-paginator
+      [currentPage]="currentPage"
+      [totalPages]="characters.info.pages"
+      (pageChanged)="page$.next($event)"
+    />
+  </div>
+
+  <section class="grid h-auto auto-rows-max grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <app-character-card
       *rxFor="let character of characters.results; trackBy: 'id'"
       [data]="character"
@@ -28,17 +34,13 @@
 </ng-container>
 
 <ng-template #err>
-  <section
-    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
+  <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     {{ errorMessage }}
   </section>
 </ng-template>
 
 <ng-template #suspense>
-  <section
-    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-  >
+  <section class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <app-skeleton-card *ngFor="let _item of [1, 2, 3, 4]" />
   </section>
 </ng-template>
