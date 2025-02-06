@@ -37,7 +37,8 @@ export class CharacterListComponent {
   currentPage = 1;
   page$ = new Subject<number>();
   errorMessage = '';
-  errorTrigger$ = new Subject();
+  errorTrigger$ = new Subject<string>();
+  suspenseTrigger$ = new Subject<void>();
 
   paramsByPage$ = this.page$.pipe(map(page => {
     return { page, name: this.search.text$.value }
@@ -48,6 +49,7 @@ export class CharacterListComponent {
   }));
 
   characters$ = merge(this.paramsByPage$, this.paramsByName$).pipe(
+    tap(() => this.suspenseTrigger$.next()),
     switchMap(params => {
       return this.characters.getAllCharacters(params).pipe(
         tap(() => (this.currentPage = params.page)),
